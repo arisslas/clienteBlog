@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   page: number;
   barraPaginacion: string[];
   pageSize: number = 10;
+  campo:string ='id';
+  orden:string="ASC";
 
   constructor(
     private oActivatedRoute: ActivatedRoute,
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPage = () => {
-    this.oPostService.getPage(this.pageSize, this.page).subscribe((oPage: IPage) => {
+    this.oPostService.getPage(this.pageSize, this.page, this.campo,this.orden).subscribe((oPage: IPage) => {
       this.aPosts = oPage.content;
       this.totalElements = oPage.totalElements;
       this.totalPages = oPage.totalPages;

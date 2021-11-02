@@ -43,12 +43,12 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr class="text-center">
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Cuerpo</th>
-                        <th>Fecha</th>
-                        <th>Etiquetas</th>
-                        <th>Visible</th>
+                        <th>ID <button type="button" class="btn" (click)="orden='ASC';campo='id';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='id';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>Título  <button type="button" class="btn" (click)="orden='ASC';campo='titulo';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='titulo';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>Cuerpo <button type="button" class="btn" (click)="orden='ASC';campo='cuerpo';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='cuerpo';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>Fecha <button type="button" class="btn" (click)="orden='ASC';campo='fecha';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='fecha';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>Etiquetas <button type="button" class="btn"(click)="orden='ASC';campo='etiquetas';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='etiquetas';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>Visible <button type="button" class="btn" (click)="orden='ASC';campo='visible';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='visible';getPage()"><i class="fas fa-arrow-down"></i></button></th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
