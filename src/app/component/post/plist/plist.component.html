@@ -59,11 +59,12 @@
                         <td>{{fila.cuerpo | trim:20}}</td>
                         <td>{{fila.fecha | showDateTime }}</td>
                         <td>{{fila.etiquetas}}</td>
-                        <td class="text-center" [innerHTML]="fila.visible | showBoolean"></td>
+                        <td><button class="{{fila.visible | showBoolean}}" (click)="cambiaVisible(fila.id )"></button></td>
                         <td class="text-center">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                                 <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
                                         class="fas fa-eye"></i></button>
+                                <button type="button" class="btn btn-info text-white"><i class="fas fa-search"></i></button>        
                                 <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
                                         class="fas fa-pen"></i></button>
                                 <button type="button" class="btn btn-danger" [routerLink]="['/remove/' + fila.id]"><i
@@ -76,5 +77,5 @@
         </div>
     </div>
 </div>
-
+<app-look></app-look>
 <app-footer></app-footer>

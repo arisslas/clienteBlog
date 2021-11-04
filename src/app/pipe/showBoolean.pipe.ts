@@ -4,10 +4,10 @@ import { IFecha } from '../model/model-interfaces';
 @Pipe({ name: 'showBoolean' })
 export class showBooleanPipe implements PipeTransform {
     transform(value: boolean) {
-        if (value) {
-            return '<i class="fas fa-check"></i>';
+        if (value==true) {
+            return "fas fa-check";
         } else {
-            return '<i class="fas fa-times"></i>';
+            return "fas fa-times";
         }
     }
 }

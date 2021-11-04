@@ -26,6 +26,7 @@ import { ModalComponent } from './component/modal/modal.component';
 import { DateTimeService } from './service/datetime.service';
 import { HeaderComponent } from './component/header/header.component';
 import { ReadComponent } from './component/read/read.component';
+import { LookComponent } from './component/look/look.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ReadComponent } from './component/read/read.component';
     TrimPipe,
     showDateTimePipe,
     showBooleanPipe,
+    LookComponent,
   ],
   imports: [
     HttpClientModule,

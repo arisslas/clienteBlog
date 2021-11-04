@@ -1,8 +1,11 @@
+import { IPost2Send } from './../../../model/model-interfaces';
 import { PaginationService } from './../../../service/pagination.service';
 import { PostService } from './../../../service/post.service';
 import { Component, OnInit } from '@angular/core';
 import { IPage, IPost } from 'src/app/model/model-interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DateTimeService } from 'src/app/service/datetime.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-plist',
@@ -19,6 +22,9 @@ export class PlistPostComponent implements OnInit {
   pageSize: number = 10;
   campo:string ='id';
   orden:string="ASC";
+  oPost:IPost;
+  ePost:IPost2Send;
+  nuevoVisible:boolean
 
   strUsuarioSession: string;
 
@@ -26,7 +32,8 @@ export class PlistPostComponent implements OnInit {
     private oRoute: ActivatedRoute,
     private oRouter: Router,
     private oPaginationService: PaginationService,
-    private oPostService: PostService,    
+    private oPostService: PostService, 
+    private oDateTimeService: DateTimeService   
   ) {
 
     if (this.oRoute.snapshot.data.message) {
@@ -57,5 +64,47 @@ export class PlistPostComponent implements OnInit {
     this.getPage();
     return false;
   }
+
+  cambiaVisible=(id:number)=>{
+    this.oPostService.getOne(id).subscribe((oData: IPost) => {
+          this.oPost= oData;
+
+          if(this.oPost.visible==true){
+              this.nuevoVisible=false;
+        }else{
+              this.nuevoVisible=true;
+              }
+
+            this.ePost= {
+              id: this.oPost.id,
+              titulo: this.oPost.titulo,
+              cuerpo: this.oPost.cuerpo,
+              etiquetas: this.oPost.etiquetas,
+              fecha:this.oDateTimeService.getStrFecha2Send(this.oDateTimeService.getStrFecha2Show(this.oPost.fecha)),
+              visible:this.nuevoVisible
+            }
+
+      this.update();
+    })
+  }
+
+  update = ():void => {
+    this.oPostService.updateOne(this.ePost).subscribe((result: number) => {
+       console.log(result)
+       this.getPage();
+    })
+  }
+
+  //look
+  /*
+  eventsSubject: Subject<void> = new Subject<void>();
+
+  openLook():void {
+    this.eventsSubject.next();
+  }
+
+  closeModal():void {
+    this.oRouter.navigate(["/plist/"]);
+  }*/
 
 }
