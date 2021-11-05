@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   pageSize: number = 10;
   campo:string ='id';
   orden:string="ASC";
-
+  busqueda:string="";
   constructor(
     private oActivatedRoute: ActivatedRoute,
     private oPaginationService: PaginationService,
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPage = () => {
-    this.oPostService.getPage(this.pageSize, this.page, this.campo,this.orden).subscribe((oPage: IPage) => {
+    this.oPostService.getPage(this.pageSize, this.page, this.campo,this.orden,this.busqueda).subscribe((oPage: IPage) => {
       this.aPosts = oPage.content;
       this.totalElements = oPage.totalElements;
       this.totalPages = oPage.totalPages;

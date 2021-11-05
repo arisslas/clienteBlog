@@ -8,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./look.component.css']
 })
 export class LookComponent implements OnInit {
-
+   mensaje:string="este es el id: "
   constructor() { }
 
   ngOnInit(): void {
   }
-  muestra = () => {
-    console.log("spy un show");
-  }
+ saludo(value:number){
+  this.mensaje=value+"";
+ }
 
 }

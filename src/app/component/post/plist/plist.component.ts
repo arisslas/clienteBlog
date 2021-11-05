@@ -1,7 +1,8 @@
+import { LookComponent } from './../../look/look.component';
 import { IPost2Send } from './../../../model/model-interfaces';
 import { PaginationService } from './../../../service/pagination.service';
 import { PostService } from './../../../service/post.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IPage, IPost } from 'src/app/model/model-interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DateTimeService } from 'src/app/service/datetime.service';
@@ -24,7 +25,8 @@ export class PlistPostComponent implements OnInit {
   orden:string="ASC";
   oPost:IPost;
   ePost:IPost2Send;
-  nuevoVisible:boolean
+  nuevoVisible:boolean;
+  busqueda:string="";
 
   strUsuarioSession: string;
 
@@ -52,7 +54,7 @@ export class PlistPostComponent implements OnInit {
   }
 
   getPage = () => {
-    this.oPostService.getPage(this.pageSize, this.page, this.campo, this.orden).subscribe((oPage: IPage) => {
+    this.oPostService.getPage(this.pageSize, this.page, this.campo, this.orden,this.busqueda).subscribe((oPage: IPage) => {
       this.aPosts = oPage.content;
       this.totalElements = oPage.totalElements;
       this.totalPages = oPage.totalPages;
@@ -107,4 +109,8 @@ export class PlistPostComponent implements OnInit {
     this.oRouter.navigate(["/plist/"]);
   }*/
 
+  @ViewChild(LookComponent) look:LookComponent;
+    enviarMensaje(id:number){
+     this.look.saludo(id);
+    }
 }
