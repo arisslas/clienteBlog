@@ -20,7 +20,12 @@ export interface IPost {
     cuerpo: string,
     fecha: IFecha,
     etiquetas: string,
-    visible: boolean
+    visible: boolean,
+    imagen: string,
+    autor: string,
+    valoracion: number,
+    numeroValoraciones:number
+
 }
 
 export interface IPage {
