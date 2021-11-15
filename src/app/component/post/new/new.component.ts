@@ -48,7 +48,9 @@ export class NewPostComponent implements OnInit {
       cuerpo: ['', Validators.required],
       etiquetas: ['', Validators.required],
       fecha: ['', Validators.required],
-      visible: ['']
+      visible: [''],
+      imagen: [''],
+      autor:['']
     });
     $('#fecha').datetimepicker({
       defaultDate: "+1w",
@@ -71,7 +73,11 @@ export class NewPostComponent implements OnInit {
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
         fecha: this.oDateTimeService.getStrFecha2Send(this.oForm.value.fecha),
-        visible: this.oForm.value.visible
+        visible: this.oForm.value.visible,
+        imagen:this.oForm.value.imagen,
+        autor:this.oForm.value.autor,
+        valoracion: null,
+        numeroValoraciones:null
       }
       this.new();
     }

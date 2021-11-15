@@ -1,3 +1,4 @@
+import { showCalification } from './../../pipe/showCalification.pipe';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IPage, IPost } from 'src/app/model/model-interfaces';
@@ -58,5 +59,6 @@ export class HomeComponent implements OnInit {
     this.getPage();
     return false;
   }
+
 
 }

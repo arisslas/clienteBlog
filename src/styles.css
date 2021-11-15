@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.starVisible{
+    color: #b4be60;
+}
+.pagination > li > a{
+    color: black !important;
+    font-weight: bold;
+}
+.pagination > .active > a
+{   
+   
+    color:black;
+    background-color: #b4be60 !Important;
+    border: solid 1px #b4be60 !Important;
+}

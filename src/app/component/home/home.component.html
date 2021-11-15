@@ -4,34 +4,31 @@
     <div class="row justify-content-center">
         <div class="p-5 mb-4 bg-light rounded-3">
             <div class="text-center">
-                <h1>bienvenidos a</h1>
-                <img class="img-fluid" src="assets/img/blogBuster600.png">
+                <img class="img-fluid" src="assets/img/titulo.png">
                 <h6 class="text-muted text-monospace">el blog que siempre quisiste tener, pero nunca te atreviste a
                     programar</h6>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md">
-            <div class="card my-5" *ngFor="let fila of aPosts">
-                <div class="card-body">
-                    <h5 class="card-title"><a [routerLink]="['/read/' + fila.id]">{{fila.titulo}}</a></h5>
-                    <p class="card-text">{{fila.cuerpo}}</p>
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="row justify-content-center">
-                        <div class="col-md text-start">
-                            {{fila.etiquetas}}
-                        </div>
-                        <div class="col-md text-end">
-                            {{fila.fecha | showDateTime }}
-                        </div>
-                    </div>
-                </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let fila of aPosts">
+          <div class="card bordeRedondo">
+            <img src="{{fila.imagen}}" class="card-img-top bordeRedondo" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{fila.titulo}}</h5>
+              <span [innerHtml]='(fila.valoracion/fila.numeroValoraciones) | showCalification'></span>
+              <span>({{fila.numeroValoraciones}})</span>
+              <p class="card-text">{{fila.cuerpo| trim:100}}</p>
+              <div><a [routerLink]="['/read/' + fila.id]" class="starVisible">Ver mas</a></div>
             </div>
+            <div class="card-footer">
+                <small class="text-muted">{{fila.etiquetas | trim:30}}</small>
+              </div>
+          </div>
         </div>
     </div>
+
 
     <div class="row justify-content-center">
         <div class="col-md d-flex justify-content-center">

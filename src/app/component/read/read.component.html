@@ -4,35 +4,62 @@
   <div class="row justify-content-center">
     <div class="p-5 mb-4 bg-light rounded-3">
       <div class="text-center">
-        <h1>bienvenidos a</h1>
-        <img class="img-fluid" src="assets/img/blogBuster600.png">
+        <img class="img-fluid" src="assets/img/titulo.png"width="500">
         <h6 class="text-muted text-monospace">el blog que siempre quisiste tener, pero nunca te atreviste a
           programar</h6>
       </div>
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-7">
-      <div class="card my-5">
+  <div class="card mb-3" style="max-width: 1400px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{oPost?.imagen}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
         <div class="card-body">
-          <h1 class="card-title my-5">{{oPost?.titulo}}</h1>
-          <p class="card-text my-5">{{oPost?.cuerpo}}</p>
-        </div>
-        <div class="card-footer text-muted">
+          <h5 class="card-title">{{oPost?.titulo}}</h5>
+          
           <div class="row justify-content-center">
             <div class="col-md text-start">
-              {{oPost?.etiquetas}}
+             <small class="text-muted">Autor {{oPost?.autor}}</small> 
             </div>
             <div class="col-md text-end">
-              {{oPost?.fecha | showDateTime }}
+              <small class="text-muted">Publicado: {{oPost?.fecha | showDateTime }}</small>
             </div>
           </div>
+         
+          <p class="card-text mt-3">{{oPost?.cuerpo}}</p>
+          <div>
+            <span class="fa fa-star" style="cursor: pointer;" id="1star" (click)="cambiaValor(1)"></span>
+            <span class="fa fa-star" style="cursor: pointer;" id="2star" (click)="cambiaValor(2)"></span>
+            <span class="fa fa-star" style="cursor: pointer;" id="3star" (click)="cambiaValor(3)"></span>
+            <span class="fa fa-star" style="cursor: pointer;" id="4star" (click)="cambiaValor(4)"></span>
+            <span class="fa fa-star" style="cursor: pointer;" id="5star" (click)="cambiaValor(5)"></span>
+            
+            <button type="button" class="btn" (click)="cambiaVoto()" [disabled]="click" style="float: right;background-color: #b4be60; color: black;">valorar</button>
+          </div>
+          
         </div>
+       
+      </div>
+    </div>
+    <div class="row g-0">
+      <div  class="col-md-12">
+         <div class="card-footer text-muted">
+            <div class="row justify-content-center">
+              <div class="col-md text-end">
+                {{oPost?.etiquetas}}
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
 
+
+
+  
   <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center mt-5">
     <a class="btn btn-primary mx-2" [routerLink]="['/home']"><i class="fas fa-home"></i> Página
       principal</a>
@@ -41,3 +68,4 @@
 
 </div>
 <app-footer></app-footer>
+<app-modal [show]="eventsSubject.asObservable()" [body]="strResult" (close)="closeModal()"> </app-modal>

@@ -1,4 +1,3 @@
-import { LookComponent } from './../../look/look.component';
 import { IPost2Send } from './../../../model/model-interfaces';
 import { PaginationService } from './../../../service/pagination.service';
 import { PostService } from './../../../service/post.service';
@@ -27,8 +26,12 @@ export class PlistPostComponent implements OnInit {
   ePost:IPost2Send;
   nuevoVisible:boolean;
   busqueda:string="";
+  flecha:boolean=false
 
   strUsuarioSession: string;
+  eventsSubjectView: Subject<number> = new Subject<number>();
+  eventsSubjectModal: Subject<void> = new Subject<void>();
+  strResult: string = null;
 
   constructor(
     private oRoute: ActivatedRoute,
@@ -83,7 +86,11 @@ export class PlistPostComponent implements OnInit {
               cuerpo: this.oPost.cuerpo,
               etiquetas: this.oPost.etiquetas,
               fecha:this.oDateTimeService.getStrFecha2Send(this.oDateTimeService.getStrFecha2Show(this.oPost.fecha)),
-              visible:this.nuevoVisible
+              visible:this.nuevoVisible,
+              imagen:this.oPost.imagen,
+              autor:this.oPost.autor,
+              valoracion:this.oPost.valoracion,
+              numeroValoraciones:this.oPost.numeroValoraciones
             }
 
       this.update();
@@ -95,6 +102,16 @@ export class PlistPostComponent implements OnInit {
        console.log(result)
        this.getPage();
     })
+  }
+
+  cambiaOrden(){
+    if(this.orden=="ASC"){
+      this.flecha=true;
+      this.orden="DESC";
+    }else{
+      this.orden="ASC";
+      this.flecha=false;
+    }
   }
 
   //look
@@ -109,8 +126,12 @@ export class PlistPostComponent implements OnInit {
     this.oRouter.navigate(["/plist/"]);
   }*/
 
-  @ViewChild(LookComponent) look:LookComponent;
-    enviarMensaje(id:number){
-     this.look.saludo(id);
-    }
+  showViewModal(id2ShowViewModal1: number) {
+    this.eventsSubjectModal.next();
+    this.eventsSubjectView.next(id2ShowViewModal1);
+  }
+
+  closeModal(): void { }
+
+  
 }

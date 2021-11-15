@@ -21,6 +21,8 @@ export class EditPostComponent implements OnInit {
   id: number = null;
   oForm: FormGroup = null;
   strResult: string = null;
+  valoracion:number;
+  numeroValoraciones:number;
 
   get f() { return this.oForm.controls; }
 
@@ -69,7 +71,11 @@ export class EditPostComponent implements OnInit {
         cuerpo: [this.oPost2Show.cuerpo, Validators.required],
         etiquetas: [this.oPost2Show.etiquetas, Validators.required],
         fecha: [this.oDateTimeService.getStrFecha2Show(this.oPost2Show.fecha), Validators.required],  //, Validators.pattern(this.fechaHoraPattern)
-        visible: [this.oPost2Show.visible]
+        visible: [this.oPost2Show.visible],
+        imagen:[this.oPost2Show.imagen],
+        autor: [this.oPost2Show.autor],
+        valoracion:[this.oPost2Show.valoracion],
+        numeroValoraciones:[this.oPost2Show.numeroValoraciones]
       });
     })
   }
@@ -82,7 +88,12 @@ export class EditPostComponent implements OnInit {
         cuerpo: this.oForm.value.cuerpo,
         etiquetas: this.oForm.value.etiquetas,
         fecha: this.oDateTimeService.getStrFecha2Send(this.oForm.value.fecha), //this.getStrFecha2Send($('#fecha').val()),
-        visible: this.oForm.value.visible
+        visible: this.oForm.value.visible,
+        imagen:this.oForm.value.imagen,
+        autor:this.oForm.value.autor,
+        valoracion:this.oPost2Show.valoracion,
+        numeroValoraciones:this.oPost2Show.numeroValoraciones
+
       }
 
       this.update();

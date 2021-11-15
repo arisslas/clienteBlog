@@ -29,8 +29,26 @@
                 </tr>
                 <tr>
                     <th>Visible</th>
-                    <td [innerHTML]="oPost?.visible | showBoolean"></td>
+                    <td><i class="{{oPost?.visible | showBoolean}}"></i></td>
                 </tr>
+                <tr>
+                    <th>imagen</th>
+                    <td><img src="{{oPost?.imagen}}" alt="" style="height:40px; width: 40px;"></td>
+                </tr>
+                <tr>
+                    <th>Autor</th>
+                    <td>{{oPost?.autor | showAutor}}</td>
+                </tr>
+                <tr>
+                    <th>Valoracion media</th>
+                    <td>{{oPost?.valoracion/oPost?.numeroValoraciones |showMedia }}/5</td>
+                </tr>
+                <tr>
+                    <th>Total de votos</th>
+                    <td>{{oPost?.numeroValoraciones}}</td>
+                </tr>
+
+
             </tbody>
         </table>
 

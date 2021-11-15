@@ -1,3 +1,6 @@
+import { showAutor } from './pipe/showAutor.pipe';
+import { showMedia } from './pipe/showMedia.pipe';
+import { showCalification } from './pipe/showCalification.pipe';
 import { PaginationService } from './service/pagination.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +29,7 @@ import { ModalComponent } from './component/modal/modal.component';
 import { DateTimeService } from './service/datetime.service';
 import { HeaderComponent } from './component/header/header.component';
 import { ReadComponent } from './component/read/read.component';
-import { LookComponent } from './component/look/look.component';
+import { LookComponent } from './component/post/look/look.component';
 
 
 @NgModule({
@@ -49,6 +52,9 @@ import { LookComponent } from './component/look/look.component';
     showDateTimePipe,
     showBooleanPipe,
     LookComponent,
+    showCalification,
+    showMedia,
+    showAutor
   ],
   imports: [
     HttpClientModule,

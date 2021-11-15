@@ -37,22 +37,24 @@
             </div>
         </div>
     </div>
-
+    <input type="text" name="busqueda" [(ngModel)]="busqueda" (input)="getPage()" placeholder="Busqueda"><i class="fas fa-search" style="margin-left: 10px;"></i>
     <div class="row justify-content-center">
+        
         <div class="col-md table-responsive-md">
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <tr>
-                        <th>Barra de búsqueda:</th>
-                        <th colspan="6"><input type="text" name="busqueda" [(ngModel)]="busqueda" (input)="getPage()"><i class="fas fa-search" style="margin-left: 10px;"></i></th>
-                        </tr>
+                    
                     <tr class="text-center">
-                        <th>ID <button type="button" class="btn" (click)="orden='ASC';campo='id';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='id';getPage()"><i class="fas fa-arrow-down"></i></button></th>
-                        <th>Título  <button type="button" class="btn" (click)="orden='ASC';campo='titulo';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='titulo';getPage()"><i class="fas fa-arrow-down"></i></button></th>
-                        <th>Cuerpo <button type="button" class="btn" (click)="orden='ASC';campo='cuerpo';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='cuerpo';getPage()"><i class="fas fa-arrow-down"></i></button></th>
-                        <th>Fecha <button type="button" class="btn" (click)="orden='ASC';campo='fecha';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='fecha';getPage()"><i class="fas fa-arrow-down"></i></button></th>
-                        <th>Etiquetas <button type="button" class="btn"(click)="orden='ASC';campo='etiquetas';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='etiquetas';getPage()"><i class="fas fa-arrow-down"></i></button></th>
-                        <th>Visible <button type="button" class="btn" (click)="orden='ASC';campo='visible';getPage()"><i class="fas fa-arrow-up"></i></button><button type="button" class="btn" (click)="orden='DESC';campo='visible';getPage()"><i class="fas fa-arrow-down"></i></button></th>
+                        <th>ID <button type="button" class="btn" (click)="cambiaOrden();campo='id';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
+                        <th>Título  <button type="button" class="btn" (click)="cambiaOrden();campo='titulo';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
+                        <th>Cuerpo <button type="button" class="btn" (click)="cambiaOrden();campo='cuerpo';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
+                        <th>Fecha <button type="button" class="btn" (click)="cambiaOrden();campo='fecha';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
+                        <th>Etiquetas <button type="button" class="btn"(click)="cambiaOrden();campo='etiquetas';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
+                        <th>Imagen</th>
+                        <th>Autor</th>
+                        <th>Valoracion</th>
+                        <th>Votos</th>
+                        <th>Visible <button type="button" class="btn" (click)="cambiaOrden();campo='visible';getPage()"><i class="fas fa-arrow-up" *ngIf="flecha"></i><i class="fas fa-arrow-down" *ngIf="!flecha"></i></button></th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -62,13 +64,17 @@
                         <td>{{fila.titulo | trim:25}}</td>
                         <td>{{fila.cuerpo | trim:20}}</td>
                         <td>{{fila.fecha | showDateTime }}</td>
-                        <td>{{fila.etiquetas}}</td>
+                        <td>{{fila.etiquetas | trim:20}}</td>
+                        <td><img src="{{fila.imagen}}" alt="" style="height:40px; width: 40px;"></td>
+                        <td>{{fila.autor | showAutor}}</td>
+                        <td>{{fila.valoracion/fila.numeroValoraciones |showMedia }}/5</td>
+                        <td>{{fila.numeroValoraciones}}</td>
                         <td><button class="{{fila.visible | showBoolean}}" (click)="cambiaVisible(fila.id )"></button></td>
                         <td class="text-center">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic mixed styles example">
                                 <button type="button" class="btn btn-success" [routerLink]="['/view/' + fila.id]"><i
                                         class="fas fa-eye"></i></button>
-                                <button type="button" class="btn btn-info text-white" (click)="enviarMensaje(fila.id)"><i class="fas fa-search"></i></button>        
+                                <button type="button" class="btn btn-info text-white" (click)="showViewModal(fila.id)"><i class="fas fa-search"></i></button>        
                                 <button type="button" class="btn btn-warning" [routerLink]="['/edit/' + fila.id]"><i
                                         class="fas fa-pen"></i></button>
                                 <button type="button" class="btn btn-danger" [routerLink]="['/remove/' + fila.id]"><i
@@ -81,5 +87,8 @@
         </div>
     </div>
 </div>
-<app-look></app-look>
+
 <app-footer></app-footer>
+<app-modal [show]="eventsSubjectModal.asObservable()" [body]="strResult" (close)="closeModal()" [size]="'xl'">
+    <app-look [show]="eventsSubjectView.asObservable()"></app-look>
+</app-modal>
